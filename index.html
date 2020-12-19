@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>Gaming</title>
+    <style>
+      h2 {
+        font-size: 40px;
+        color: #8b0000;
+      }
+      body {
+        text-align: center;
+        font-family: arial;
+        background-color: #f6f2cf;
+      }
+      img {
+        height: 400px;
+      }
+      input[type=button]{
+        background-color: white;
+        color: #8b0000;
+        font-size: 20px;
+        padding: 8 8 8 8;
+        text-decoration: none;
+        margin: 2px 2px;
+        font-family: arial;
+        border-radius: 10px 10px 10px 10px;
+      }
+      input[type=button]:hover {
+        background-color: gray;
+      }
+      span {
+        font-size: 30px;
+      }
+      input[type=text]{
+        font-family: arial;
+        height: 40px;
+        width: 200px;
+        font-size: 20px;
+      }
+    </style>
+    <script>
+    var pics = ["<img src = 'ollie.gif'>", "<img src = 'kickflip.gif'>", "<img src = 'heelflip.gif'>", "<img src = 'popShuvit.gif'>", "<img src = 'dropIn.gif'>"];
+    var answers = [];
+    var i = 0;
+    var score = 0;
+    var solutions = ["ollie", "kickflip", "heelflip", "pop shuvit", "drop in"];
+      function hidePlayAgain() {
+        document.getElementById("again").style.visibility = "hidden";
+      }
+      function displayPicture() {
+        document.getElementById("photo").innerHTML = pics[i];
+      }
+      function gatherGuesses() {
+        answers[i] = document.getElementById("input").value;
+        check();
+      }
+      function check() {
+          if(answers[i] == solutions[i]) {
+            score = score + 1;
+          }
+        if(i>3) {
+          endScreen();
+        }
+        i = i + 1
+      }
+      function endScreen() {
+
+        var table = "<br>" + "YOUR SCORE: " + score + "<br>";
+        document.getElementById("again").style.visibility = "visible";
+        document.getElementById("photo").style.visibility = "hidden";
+        document.getElementById("button").style.visibility = "hidden";
+        document.getElementById("input").style.visibility = "hidden";
+
+         for(var i = 0; i < 5 ;i = i + 1 )
+         {
+           table = table + "Your answer --- " + answers[i] + "&nbsp &nbsp &nbsp" + "Correct answer --- " + solutions[i] + "<br>";
+         }
+
+         document.getElementById("output").innerHTML = table;
+
+
+      }
+    </script>
+  </head>
+
+  <body onload = "displayPicture(); hidePlayAgain()">
+    <h2>Guess The Skateboarding Trick</h2>
+    <span id = "photo"></span>
+    <br>
+    <br>
+    <br>
+    <input id = "input" type = "text">
+    <input id = "button" type = "button" value = "next" onclick = "gatherGuesses(); displayPicture()">
+    <span id = "output"></span>
+    <br>
+    <input id = "again" type = "button" value = "Play Again" onclick = "location.reload()">
+  </body>
+</html>
